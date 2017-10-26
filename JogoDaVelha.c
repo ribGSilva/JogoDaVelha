@@ -32,13 +32,16 @@ struct COORD {
 void getScreenSize(){
 	#ifdef _WIN32
         HEIGTH =24;
-	    WIDTH = 79;
+	WIDTH = 79;
     #else
         struct winsize w;
 	    ioctl(0, TIOCGWINSZ, &w);
 	    
-	    HEIGTH = w.ws_row;
-	    WIDTH = w.ws_col;
+	    //HEIGTH = w.ws_row;
+	    //WIDTH = w.ws_col;
+	
+		HEIGTH =19;
+		WIDTH = 80;
     #endif
     
 }
