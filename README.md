@@ -5,6 +5,8 @@
     
 Jogo da Velha em C que funciona em Linux, Mac e Windows.
 
+Impossivel usuário ganhar da maquina.
+
 Para rodar em Linux, siga os seguintes passos:
 
 1- abra o termial e navegue até a pasta do arquivo.
