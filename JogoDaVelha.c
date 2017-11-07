@@ -1,3 +1,8 @@
+/*
+		Gabriel Ribeiro Silva 170004848
+		Julio Soares          130005165 
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -32,16 +37,18 @@ struct COORD {
 void getScreenSize(){
 	#ifdef _WIN32
         HEIGTH =24;
-	WIDTH = 79;
+	    WIDTH = 79;
+	    system("color 70");
     #else
         struct winsize w;
 	    ioctl(0, TIOCGWINSZ, &w);
 	    
+	    //pega tamanho da tela para ficar responsivo mas deu problema 
 	    //HEIGTH = w.ws_row;
 	    //WIDTH = w.ws_col;
-	
-		HEIGTH =19;
-		WIDTH = 80;
+    
+        HEIGTH =19;
+        WIDTH = 79;
     #endif
     
 }
@@ -77,7 +84,8 @@ void *thread_ponteiro_menu_principal(void *args) {
     
     while (*running == BOOL_TRUE){
         if (tempo == 0){
-        	gotoxy(0, 0);//top
+        	//borda piscante
+        	/*gotoxy(0, 0);//top
 		    putchar(201); //top left
 		    for (i=1; i<WIDTH; i++){
 		        putchar(205);
@@ -95,12 +103,13 @@ void *thread_ponteiro_menu_principal(void *args) {
 		    for (i=1; i<WIDTH; i++){
 		        putchar(205);
 		    }
-		    putchar(188);//bottom right
+		    putchar(188);//bottom right*/
         	
         	gotoxy(ponteiro.x, ponteiro.y);
             printf("%c %c %c %c %c %c %c", 196, 196, 196, 196, 196, 196, 196);
         } else {
-        	gotoxy(0, 0);//top
+        	//borda piscante
+        	/*gotoxy(0, 0);//top
 		    for (i=0; i<=WIDTH; i++){
 		        putchar(32);
 		    }
@@ -114,7 +123,7 @@ void *thread_ponteiro_menu_principal(void *args) {
 		    gotoxy(0, HEIGTH);//bottom
 		    for (i=0; i<=WIDTH; i++){
 		        putchar(32);
-		    }
+		    }*/
 		    
 		    gotoxy(ponteiro.x, ponteiro.y);
             printf(" %c %c %c %c %c %c ", 196, 196, 196, 196, 196, 196);
@@ -164,7 +173,8 @@ void *thread_ponteiro_jogo(void *args) {
     
     while (*running == BOOL_TRUE){
         if (tempo == 0){
-        	gotoxy(0, 0);//top
+        	//borda piscante
+        	/*gotoxy(0, 0);//top
 		    putchar(201); //top left
 		    for (i=1; i<WIDTH; i++){
 		        putchar(205);
@@ -182,7 +192,7 @@ void *thread_ponteiro_jogo(void *args) {
 		    for (i=1; i<WIDTH; i++){
 		        putchar(205);
 		    }
-		    putchar(188);//bottom right
+		    putchar(188);//bottom right*/
         	
         	
         	gotoxy(ponteiro.x, ponteiro.y);
@@ -202,7 +212,8 @@ void *thread_ponteiro_jogo(void *args) {
             putchar(217);
             
         } else {
-        	gotoxy(0, 0);//top
+        	//borda piscante
+        	/*gotoxy(0, 0);//top
 		    for (i=0; i<=WIDTH; i++){
 		        putchar(32);
 		    }
@@ -216,7 +227,7 @@ void *thread_ponteiro_jogo(void *args) {
 		    gotoxy(0, HEIGTH);//bottom
 		    for (i=0; i<=WIDTH; i++){
 		        putchar(32);
-		    }
+		    }*/
 		    
 		    
 		    gotoxy(ponteiro.x, ponteiro.y);
@@ -283,7 +294,7 @@ void moldura()
     printf("[JOGO DA VELHA]");
     
     gotoxy((WIDTH / 2) - 20, HEIGTH);
-    printf("[Copyright(C) 2017 Gabriel Ribeiro Silva]");
+    printf("[Copyright(C) 2017 Gabriel Rib e Julio]");
     
     fflush(stdout);
 }
@@ -765,7 +776,7 @@ int main() {
     clearScreen();
     
     //cria moldura
-    //moldura();
+    moldura();
     
     //tela principal
     telaPrincipal();
@@ -786,8 +797,6 @@ int main() {
 	        system("/bin/stty raw");
         	tecla = getchar() - '0';
 	    #endif
-	    
-	    //printf("aaaaa %d", tecla);
         
         //printf("%d", tecla);
         //system("/bin/stty cooked");
@@ -818,7 +827,7 @@ int main() {
                         ponteiro.y = 7;
                         estado = ESTADO_JOGO_SINGLE;//mudo estado do jogo
                         clearScreen();//limpo a tela
-                        //moldura();//adiciono a moudura
+                        moldura();//adiciono a moudura
                         telaJogo();//crio a tela jogo
                         limpaMatriz();
                         pontosX = 0;
@@ -842,7 +851,7 @@ int main() {
                         ponteiro.y = 7;
                         estado = ESTADO_JOGO_VS;//mudo estado do jogo
                         clearScreen();//limpo a tela
-                        //moldura();//adiciono a moudura
+                        moldura();//adiciono a moudura
                         telaJogo();//crio a tela jogo
                         limpaMatriz();
                         pontosX = 0;
@@ -888,7 +897,7 @@ int main() {
                         run_thread_jogo = BOOL_FALSE;
                         pthread_cancel(thread_ponteiro);
                         clearScreen();//limpo a tela
-                        //moldura();//adiciono a moudura
+                        moldura();//adiciono a moudura
                         telaPrincipal();
                         ponteiro.x = (WIDTH / 2) - 6;
                         ponteiro.y = 14;
@@ -926,7 +935,7 @@ int main() {
                 } else {
                     if (tecla == 10 || tecla == 13 || tecla == -35){ // jogar novamente
                         clearScreen();//limpo a tela
-                        //moldura();//adiciono a moudura
+                        moldura();//adiciono a moudura
                         telaJogo();//crio a tela jogo
                         desenhaPlacar(pontosX, pontosO, velhas);//desenha placar
                         if (vezDoX == BOOL_TRUE)
@@ -940,7 +949,7 @@ int main() {
                         run_thread_jogo = BOOL_FALSE;
                         pthread_cancel(thread_ponteiro);
                         clearScreen();//limpo a tela
-                        //moldura();//adiciono a moudura
+                        moldura();//adiciono a moudura
                         telaPrincipal();
                         ponteiro.x = (WIDTH / 2) - 6;
                         ponteiro.y = 14;
@@ -972,7 +981,7 @@ int main() {
                         run_thread_jogo = BOOL_FALSE;
                         pthread_cancel(thread_ponteiro);
                         clearScreen();//limpo a tela
-                        //moldura();//adiciono a moudura
+                        moldura();//adiciono a moudura
                         telaPrincipal();
                         ponteiro.x = (WIDTH / 2) - 6;
                         ponteiro.y = 14;
@@ -1019,7 +1028,7 @@ int main() {
                         clearScreen();//limpo a tela
                         fimRodada = BOOL_FALSE;
                         limpaMatriz();
-                        //moldura();//adiciono a moudura
+                        moldura();//adiciono a moudura
                         telaJogo();//crio a tela jogo
                         desenhaPlacar(pontosX, pontosO, velhas);//desenha placar
                         if (vezDoX == BOOL_FALSE){
@@ -1033,7 +1042,7 @@ int main() {
                         run_thread_jogo = BOOL_FALSE;
                         pthread_cancel(thread_ponteiro);
                         clearScreen();//limpo a tela
-                        //moldura();//adiciono a moudura
+                        moldura();//adiciono a moudura
                         telaPrincipal();
                         ponteiro.x = (WIDTH / 2) - 6;
                         ponteiro.y = 14;
